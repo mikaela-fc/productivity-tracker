@@ -5,6 +5,8 @@ let interval = null;
 function startTimer() {
     if (interval) return; //prevents multiple timers
 
+    currSubj = document.getElementById("currSubj").value;
+
     startTime = Date.now();
 
     //Updates UI to reflect seconds passed
@@ -26,21 +28,23 @@ function stopTimer() {
     clearInterval(interval);
     interval = null;
 
-    const endTime = Date.now();
+    const endTime = Date.now(); 
 
     // calculate the total study duration
     const duration = Math.floor((endTime - startTime)/1000);
     startTime = null;
 
+    const subject = currSubj;
+
     document.getElementById("timer").textContent = "0"; // resets timer
 
-    if (duration>0) saveSession(duration);
+    if (duration>0) saveSession(subject, duration);
 }
 
 /* keeps track of sessions */
-function saveSession(duration){
+function saveSession(subject, duration){
     const sessions = JSON.parse(localStorage.getItem("sessions")) || [];
-    sessions.push(duration);
+    sessions.push({Subj: subject, Dur: duration});
     localStorage.setItem("sessions", JSON.stringify(sessions));
     displaySessions();
 }
@@ -56,13 +60,14 @@ function displaySessions() {
         const div = document.createElement("div");
 
         // Session names
-        const seshCount = document.createElement("span");
-        seshCount.textContent = `Session ${index + 1}`;
+        const seshSub = document.createElement("span");
+        seshSub.textContent = `${index + 1}. ${s.Subj}`;
 
         // Session durations
         const timeText = document.createElement("span");
-        const min = Math.floor(s/60);
-        const sec = s % 60;
+        let tempDur = parseInt(s.Dur, 10);
+        const min = Math.floor(tempDur/60);
+        const sec = tempDur % 60;
         timeText.textContent = `${min} minutes, ${sec} seconds`;
         
 
@@ -74,7 +79,7 @@ function displaySessions() {
             localStorage.setItem("sessions", JSON.stringify(sessions));
             displaySessions();
         }
-        div.appendChild(seshCount);
+        div.appendChild(seshSub);
         div.appendChild(timeText);
         div.appendChild(btn);
         list.appendChild(div);
