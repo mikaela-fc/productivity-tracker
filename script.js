@@ -57,7 +57,7 @@ function displaySessions() {
 
         // Session names
         const seshCount = document.createElement("span");
-        seshCount.textContent = `Session ${index}`;
+        seshCount.textContent = `Session ${index + 1}`;
 
         // Session durations
         const timeText = document.createElement("span");
@@ -82,7 +82,7 @@ function displaySessions() {
 }
 
 function clearAll() {
-    localStorage.setItem("sessions", []);
+    localStorage.removeItem("sessions");
     displaySessions();
 }
 
