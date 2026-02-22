@@ -1,11 +1,33 @@
 body {
     font-family: Arial, Helvetica, sans-serif;
-    text-align: center;
-    margin-top: 50px;
+    margin: 0px;
+
+}
+
+#home {
+    background-color: rgb(27, 1, 57);
+    padding: 25px;
+    margin: 0px;
+    position: sticky;
+    top: 0px;
+
+    display: flex;
+    justify-content: flex-end;
+    }
+
+.topmenu {
+    margin: 5px;
+    padding: 5px;
+    font-size: 20px;
+    color: lavender;
 }
 
 h3 {
-    align-items: center;
+    text-align: center;
+}
+
+.wrapper {
+    text-align: center;
 }
 
 button {
@@ -14,10 +36,17 @@ button {
     font-size: 16px;
 }
 
+.container {
+    padding: 24px;
+    align-items: center;
+    text-align: center;
+}
+
 #sesh {
-    background-color: beige;
+    background-color: rgb(175, 199, 244);
     margin: 10%;
     padding-top: 10px;
+    align-items: center;
 }
 
 #sessions div{
