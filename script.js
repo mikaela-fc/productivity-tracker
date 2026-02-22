@@ -53,11 +53,18 @@ function displaySessions() {
     // gets the past sessions, if exists
     const sessions = JSON.parse(localStorage.getItem("sessions")) || [];
     sessions.forEach((s, index) => {
-        const li = document.createElement("li");
+        const div = document.createElement("div");
 
+        // Session names
+        const seshCount = document.createElement("span");
+        seshCount.textContent = `Session ${index}`;
+
+        // Session durations
+        const timeText = document.createElement("span");
         const min = Math.floor(s/60);
         const sec = s % 60;
-        li.textContent = `${min} minutes, ${sec} seconds`;
+        timeText.textContent = `${min} minutes, ${sec} seconds`;
+        
 
         // adds a delete session function
         const btn = document.createElement("button");
@@ -67,9 +74,10 @@ function displaySessions() {
             localStorage.setItem("sessions", JSON.stringify(sessions));
             displaySessions();
         }
-
-        li.appendChild(btn);
-        list.appendChild(li);
+        div.appendChild(seshCount);
+        div.appendChild(timeText);
+        div.appendChild(btn);
+        list.appendChild(div);
     });
 }
 
