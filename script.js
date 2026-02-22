@@ -81,4 +81,9 @@ function displaySessions() {
     });
 }
 
+function clearAll() {
+    localStorage.setItem("sessions", []);
+    displaySessions();
+}
+
 displaySessions();
